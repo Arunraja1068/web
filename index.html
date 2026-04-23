@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+   
+  <style>
+    * {
+     
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  line-height: 1.6;
+  background: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background: #222;
+  color: #fff;
+  padding: 1rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color:whitesmoke;
+  text-decoration: none;
+
+}
+.nav-links li a:hover{
+ color: aquamarine;
+ transition: 1s;
+}
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: #fff;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.btn:hover{
+  background-color: aquamarine;
+  color: black;
+  transition: 0.7s;
+}
+section {
+  padding: 18px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #222;
+  color: #fff;
+}
+.logo-img {
+  height: 60px;
+  width: auto;
+  margin-right: 20px;
+}
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: #222;
+  color: #fff;
+}
+
+.footer-logo {
+  height: 60px;
+  width: auto;
+  margin-bottom: 10px;
+}
+.contact-details {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.contact-details p {
+  margin: 0.5rem 0;
+}
+
+.contact-details a {
+  color: #4facfe;
+  text-decoration: none;
+}
+
+.contact-details a:hover {
+  text-decoration: underline;
+}
+#pd {
+  text-decoration: none;
+  color:black ;
+}
+.project-card:hover {
+  box-shadow: 5px 10px 5px #888 ;
+  transform: translateY(-5px); /* optional lift effect */
+  transition: all 0.3s ease;   /* smooth animation */
+}
+#about p{
+  padding: 5px;
+}
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    text-align: center;
+  }
+  .nav-links {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .nav-links li {
+    margin: 10px 0;
+  }
+  .hero {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.project-grid {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) {
+  .project-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+  </style>
+</head>
+<body>
+   
+  
+  <header>
+  <nav>
+  <div style="display:flex; align-items:center;">
+    <img src="Southeast Quay.jpg" alt="My Logo" class="logo-img">
+    <h1 style="color:white; font-size:1.5rem; margin-left:10px;">RK Official</h1>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul> 
+</nav>
+
+</header>
+
+  
+  <section class="hero">
+    
+    <h2>Hello, I'm a Front-End Developer </h2>
+    <p>I build responsive and interactive websites.</p>
+   <a href="#projects" class="btn">view project</a> 
+  </section>
+
+  
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      Passionate about creating beautiful, user-friendly web experiences.
+      Skilled in HTML, CSS, JavaScript, and modern frameworks.
+    </p>
+  </section>
+
+  
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <a id="pd" href="http://127.0.0.1:5500/landingpage.html">
+        <h3>Landing Page</h3>
+        <p>A responsive business landing page with animations.</p>
+        </a>
+      </div>
+      <div class="project-card">
+        <a  id="pd" href="http://127.0.0.1:5500/dashboard.html">
+        <h3>Dashboard UI</h3>
+        <p>Interactive charts and data visualization using Chart.js.</p>
+        </a>
+      </div>
+      <div class="project-card">
+        <a  id="pd" href="http://127.0.0.1:5500/e-commerce.html">
+        <h3>E-Commerce UI</h3>
+        <p>Product listing and shopping cart interface.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+ 
+  <section id="contact">
+  <h2>Contact Me</h2>
+  <div class="contact-details">
+    <p><strong>Email:</strong> arunraja102268@gmail.com</p>
+    <p><strong>Phone:</strong> +91 8072427088</p>
+    <p><strong>Location:</strong> Sriperumbudur, Tamil Nadu, India</p>
+    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+  </div>
+
+  
+</section>
+
+ <footer>
+  <div class="footer-content">
+    <img src="Southeast Quay.jpg" alt="Phoenix Logo" class="footer-logo">
+    <p>&copy; 2026 RK Official | MyPortfolio</p>
+  </div>
+</footer>
+
+
+</body>
+</html>
