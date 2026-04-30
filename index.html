@@ -3,269 +3,1326 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-   
+  <meta name="description" content="RK Official - Front-End Developer from Sriperumbudur, Tamil Nadu. I build responsive websites and landing pages for small businesses.">
+  <title>RK Official | Front-End Developer</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  
   <style>
-    * {
-     
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-}
+    :root {
+      --color-primary: #4f46e5;
+      --color-primary-dark: #4338ca;
+      --color-accent: #06b6d4;
+      --color-dark: #1e293b;
+      --color-darker: #0f172a;
+      --color-light: #f8fafc;
+      --color-gray: #64748b;
+      --color-gray-light: #94a3b8;
+      --color-white: #ffffff;
+      --color-focus: #fbbf24;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      
+      --radius-sm: 8px;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      
+      --transition-fast: 150ms ease;
+      --transition: 300ms ease;
+      --transition-slow: 500ms ease;
+      
+      --header-height: 80px;
+      --container-max: 1200px;
+      --section-padding: clamp(3rem, 8vw, 5rem);
+    }
 
-body {
-  line-height: 1.6;
-  background: #f9f9f9;
-  color: #333;
-}
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-header {
-  background: #222;
-  color: #fff;
-  padding: 1rem;
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--header-height);
+    }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-}
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.7;
+      background: var(--color-light);
+      color: var(--color-dark);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
 
-.nav-links li {
-  margin-left: 20px;
-}
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+      text-wrap: balance;
+    }
 
-.nav-links a {
-  color:whitesmoke;
-  text-decoration: none;
+    /* ===== PROFESSIONAL PRELOADER ===== */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--color-white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                  visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-}
-.nav-links li a:hover{
- color: aquamarine;
- transition: 1s;
-}
-.hero {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-  color: #fff;
-}
+    .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-.btn {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.7rem 1.5rem;
-  background: #333;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-}
-.btn:hover{
-  background-color: aquamarine;
-  color: black;
-  transition: 0.7s;
-}
-section {
-  padding: 18px;
-}
+    .preloader-content {
+      text-align: center;
+      max-width: 320px;
+      padding: 2rem;
+    }
 
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
+    .preloader-brand {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 0.2s forwards;
+    }
 
-.project-card {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+    .preloader-brand-mark {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+    }
 
+    .preloader-brand-mark i {
+      color: var(--color-white);
+      font-size: 1.5rem;
+    }
 
+    .preloader-brand-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-darker);
+      letter-spacing: -0.5px;
+    }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #222;
-  color: #fff;
-}
-.logo-img {
-  height: 60px;
-  width: auto;
-  margin-right: 20px;
-}
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  background: #222;
-  color: #fff;
-}
+    .preloader-brand-tagline {
+      font-size: 0.8125rem;
+      color: var(--color-gray);
+      margin-top: 0.25rem;
+      font-weight: 400;
+    }
 
-.footer-logo {
-  height: 60px;
-  width: auto;
-  margin-bottom: 10px;
-}
-.contact-details {
-  margin-bottom: 2rem;
-  text-align: center;
-}
+    .preloader-status {
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 0.5s forwards;
+    }
 
-.contact-details p {
-  margin: 0.5rem 0;
-}
+    .preloader-track {
+      width: 180px;
+      height: 2px;
+      background: #e2e8f0;
+      border-radius: var(--radius-full);
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
 
-.contact-details a {
-  color: #4facfe;
-  text-decoration: none;
-}
+    .preloader-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      border-radius: var(--radius-full);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
 
-.contact-details a:hover {
-  text-decoration: underline;
-}
-#pd {
-  text-decoration: none;
-  color:black ;
-}
-.project-card:hover {
-  box-shadow: 5px 10px 5px #888 ;
-  transform: translateY(-5px); /* optional lift effect */
-  transition: all 0.3s ease;   /* smooth animation */
-}
-#about p{
-  padding: 5px;
-}
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    text-align: center;
-  }
-  .nav-links {
-    flex-direction: column;
-    margin-top: 10px;
-  }
-  .nav-links li {
-    margin: 10px 0;
-  }
-  .hero {
-    padding: 2rem 1rem;
-  }
-}
+    .preloader-fill::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
 
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.2rem;
-  }
-  .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-}
-img {
-  max-width: 100%;
-  height: auto;
-}
-.project-grid {
-  grid-template-columns: 1fr;
-}
-@media (min-width: 600px) {
-  .project-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-}
+    .preloader-fill.active::after {
+      opacity: 1;
+    }
 
+    .preloader-status-text {
+      margin-top: 1.25rem;
+      font-size: 0.75rem;
+      color: var(--color-gray-light);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .preloader-dots::after {
+      content: '';
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes dots {
+      0% { content: ''; }
+      25% { content: '.'; }
+      50% { content: '..'; }
+      75% { content: '...'; }
+      100% { content: ''; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: 8px 16px;
+      z-index: 100;
+      transition: top var(--transition-fast);
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0 0 var(--radius-sm) 0;
+    }
+
+    .skip-link:focus { top: 0; }
+
+    /* Header */
+    header {
+      background: var(--color-darker);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-accent);
+      transition: transform var(--transition);
+    }
+
+    .logo:hover .logo-img { transform: scale(1.05); }
+
+    .logo-text {
+      color: var(--color-white);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: color var(--transition-fast);
+      border-radius: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--color-white);
+      outline: none;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after { width: 100%; }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 4px;
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: var(--color-white);
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .menu-toggle:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: clamp(4rem, 10vw, 6rem) 2rem;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      color: var(--color-white);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      z-index: -1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+      animation: fadeInUp 0.6s ease-out 0.1s both;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      opacity: 0.9;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease-out 0.3s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: var(--color-white);
+      color: var(--color-primary);
+      text-decoration: none;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: var(--shadow-lg);
+      transition: all var(--transition);
+      border: 2px solid transparent;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+
+    .btn:active { transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-white);
+      border-color: var(--color-white);
+    }
+
+    .btn-outline:hover {
+      background: var(--color-white);
+      color: var(--color-primary);
+    }
+
+    /* Small buttons for project links */
+    .btn-sm {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      background: var(--color-primary);
+      color: var(--color-white);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: all var(--transition-fast);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-sm:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border: 1.5px solid var(--color-primary);
+    }
+
+    .btn-sm-outline:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    /* Sections */
+    section {
+      padding: var(--section-padding) 2rem;
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .section-header { margin-bottom: 3rem; }
+
+    section h2 {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      color: var(--color-darker);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      border-radius: 2px;
+    }
+
+    /* About Section */
+    #about {
+      background: var(--color-white);
+      border-radius: var(--radius);
+      margin-top: -3rem;
+      position: relative;
+      z-index: 10;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-content {
+      max-width: 800px;
+    }
+
+    .about-content > p {
+      font-size: 1.15rem;
+      color: var(--color-gray);
+      line-height: 1.8;
+    }
+
+    .about-content > p + p {
+      margin-top: 1.25rem;
+    }
+
+    .about-content strong {
+      color: var(--color-darker);
+      font-weight: 600;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 2.5rem 0;
+      padding: 1.5rem 0;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--color-gray);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .skill-tag {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: var(--color-white);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+      cursor: default;
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== PROJECTS SECTION - FIXED ===== */
+    #projects { padding-top: 4rem; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      /* KEY FIX: Align all cards to same height */
+      align-items: stretch;
+    }
+
+    .project-card {
+      background: var(--color-white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      /* KEY FIX: Force equal height */
+      height: 100%;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-card:focus-visible {
+      outline: 3px solid var(--color-focus);
+      outline-offset: 4px;
+      border-radius: var(--radius);
+    }
+
+    .project-image {
+      height: 200px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--color-white);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition);
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.3), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .project-card:hover .project-image::after { opacity: 1; }
+
+    /* KEY FIX: Content area grows to fill space */
+    .project-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-darker);
+    }
+
+    /* KEY FIX: Description grows to push buttons down */
+    .project-card p {
+      color: var(--color-gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    /* KEY FIX: Buttons always at bottom */
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    /* Hire Me CTA */
+    #hire {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: var(--color-white);
+      border-radius: var(--radius);
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hire::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    #hire h2 {
+      color: var(--color-white);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    #hire h2::after {
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.5);
+    }
+
+    #hire > p {
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    #hire .btn {
+      background: var(--color-white);
+      color: var(--color-primary);
+      position: relative;
+    }
+
+    #hire .btn:hover {
+      background: var(--color-light);
+    }
+
+    /* Contact Section */
+    #contact {
+      background: var(--color-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 3rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      transition: transform var(--transition-fast);
+    }
+
+    .contact-item:hover .contact-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .contact-info h4 {
+      font-size: 0.875rem;
+      color: var(--color-gray);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-info p,
+    .contact-info a {
+      color: var(--color-darker);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+      word-break: break-word;
+      font-size: 0.95rem;
+    }
+
+    .contact-info a:hover,
+    .contact-info a:focus-visible {
+      color: var(--color-primary);
+      outline: none;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: var(--color-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gray);
+      font-size: 1.25rem;
+      transition: all var(--transition);
+      text-decoration: none;
+      border: 2px solid transparent;
+    }
+
+    .social-link:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .social-link:focus-visible {
+      outline: 3px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-darker);
+      color: var(--color-white);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 2px solid var(--color-accent);
+      transition: transform var(--transition);
+    }
+
+    .footer-logo:hover { transform: scale(1.1); }
+
+    footer p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      :root { --header-height: 70px; }
+
+      .preloader-brand-mark {
+        width: 48px;
+        height: 48px;
+      }
+
+      .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-darker);
+        flex-direction: column;
+        padding: 1rem 2rem 2rem;
+        gap: 0;
+        box-shadow: var(--shadow-lg);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+        animation: slideDown 0.3s ease-out;
+      }
+
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .nav-links li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-links li:last-child { border-bottom: none; }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-outline { margin-left: 0; }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      section {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .contact-grid { gap: 1.5rem; }
+
+      .project-links { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 0 1rem; }
+      .hero { padding: 3rem 1rem; }
+      .project-grid { grid-template-columns: 1fr; }
+      .skills { gap: 0.5rem; }
+      .skill-tag {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+      }
+      #hire { padding: 3rem 1.5rem; }
+    }
+
+    @media print {
+      .preloader, header, .hero, .social-links, .menu-toggle, #hire { display: none; }
+      section {
+        padding: 2rem 0;
+        page-break-inside: avoid;
+      }
+      a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: var(--color-gray);
+      }
+    }
   </style>
 </head>
 <body>
-   
   
-  <header>
-  <nav>
-  <div style="display:flex; align-items:center;">
-    <img src="Southeast Quay.jpg" alt="My Logo" class="logo-img">
-    <h1 style="color:white; font-size:1.5rem; margin-left:10px;">RK Official</h1>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul> 
-</nav>
-
-</header>
-
-  
-  <section class="hero">
-    
-    <h2>Hello, I'm a Front-End Developer </h2>
-    <p>I build responsive and interactive websites.</p>
-   <a href="#projects" class="btn">view project</a> 
-  </section>
-
-  
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      Passionate about creating beautiful, user-friendly web experiences.
-      Skilled in HTML, CSS, JavaScript, and modern frameworks.
-    </p>
-  </section>
-
-  
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <a id="pd" href="landingpage.html">
-        <h3>Landing Page</h3>
-        <p>A responsive business landing page with animations.</p>
-        </a>
+  <!-- Professional Preloader -->
+  <div class="preloader" id="preloader" role="status" aria-label="Loading portfolio">
+    <div class="preloader-content">
+      <div class="preloader-brand">
+        <div class="preloader-brand-mark">
+          <i class="fas fa-code" aria-hidden="true"></i>
+        </div>
+        <div class="preloader-brand-name">RK Official</div>
+        <div class="preloader-brand-tagline">Front-End Developer</div>
       </div>
-      <div class="project-card">
-        <a  id="pd" href="dashboard.html">
-        <h3>Dashboard UI</h3>
-        <p>Interactive charts and data visualization using Chart.js.</p>
-        </a>
-      </div>
-      <div class="project-card">
-        <a  id="pd" href="e-commerce.html">
-        <h3>E-Commerce UI</h3>
-        <p>Product listing and shopping cart interface.</p>
-        </a>
+      
+      <div class="preloader-status">
+        <div class="preloader-track">
+          <div class="preloader-fill" id="progressBar"></div>
+        </div>
+        <div class="preloader-status-text">
+          Initializing<span class="preloader-dots"></span>
+        </div>
       </div>
     </div>
-  </section>
-  
- 
-  <section id="contact">
-  <h2>Contact Me</h2>
-  <div class="contact-details">
-    <p><strong>Email:</strong> arunraja102268@gmail.com</p>
-    <p><strong>Phone:</strong> +91 8072427088</p>
-    <p><strong>Location:</strong> Sriperumbudur, Tamil Nadu, India</p>
-    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
-    <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
   </div>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   
-</section>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="#" class="logo" aria-label="RK Official Home">
+        <img src="Southeast Quay.jpg" alt="RK Logo" class="logo-img" loading="lazy" width="50" height="50">
+        <span class="logo-text">RK Official</span>
+      </a>
+      
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="#about" role="menuitem">About</a></li>
+        <li role="none"><a href="#projects" role="menuitem">Projects</a></li>
+        <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
- <footer>
-  <div class="footer-content">
-    <img src="Southeast Quay.jpg" alt="Phoenix Logo" class="footer-logo">
-    <p>&copy; 2026 RK Official | MyPortfolio</p>
-  </div>
-</footer>
+  <main id="main-content">
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-content">
+        <span class="hero-badge">
+          <span aria-hidden="true">👋</span> Available for work
+        </span>
+        <h1>Front-End Developer from Tamil Nadu</h1>
+        <p>I build fast, responsive websites that work on every device. Helping small businesses get online with clean, professional web design.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn">
+            <i class="fas fa-folder-open" aria-hidden="true"></i> See My Work
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <i class="fas fa-envelope" aria-hidden="true"></i> Hire Me
+          </a>
+        </div>
+      </div>
+    </section>
 
+    <section id="about" aria-labelledby="about-heading">
+      <div class="section-header">
+        <h2 id="about-heading">About Me</h2>
+      </div>
+      <div class="about-content">
+        <p>
+          I'm Arun R, a front-end developer based in <strong>Thiruvannamalai, Tamil Nadu</strong>. I started learning web development to help local businesses create their online presence without spending too much.
+        </p>
+        <p>
+          I specialize in building <strong>responsive websites and landing pages</strong> using HTML, CSS, and JavaScript. Every site I make is mobile-friendly, loads fast, and looks professional — because your customers are browsing on their phones.
+        </p>
+        <p>
+          Whether you need a simple business website, a product landing page, or a basic admin dashboard, I can build it. I focus on clean code, clear communication, and delivering on time.
+        </p>
+        
+        <div class="about-stats">
+          <div class="stat-item">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">1+</div>
+            <div class="stat-label">Year Learning</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Open for Work</div>
+          </div>
+        </div>
+
+        <div class="skills" role="list" aria-label="Technical skills">
+          <span class="skill-tag" role="listitem">HTML5</span>
+          <span class="skill-tag" role="listitem">CSS3</span>
+          <span class="skill-tag" role="listitem">JavaScript</span>
+          <span class="skill-tag" role="listitem">Responsive Design</span>
+          <span class="skill-tag" role="listitem">UI/UX</span>
+          <span class="skill-tag" role="listitem">Git</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-heading">
+      <div class="section-header">
+        <h2 id="projects-heading">Featured Projects</h2>
+      </div>
+      <div class="project-grid">
+        
+        <div class="project-card">
+          <div class="project-image">
+            <i class="fas fa-rocket" aria-hidden="true"></i>
+          </div>
+          <div class="project-content">
+            <h3>Business Landing Page</h3>
+            <p>A fully responsive landing page built with HTML and CSS. Includes hero section, services overview, pricing cards, and a working contact form. Optimized for mobile and fast loading.</p>
+            <div class="project-links">
+              <a href="landingpage.html" class="btn-sm" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="#" class="btn-sm btn-sm-outline" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> Source Code
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-image">
+            <i class="fas fa-chart-line" aria-hidden="true"></i>
+          </div>
+          <div class="project-content">
+            <h3>Admin Dashboard UI</h3>
+            <p>A clean admin dashboard interface with sidebar navigation, summary cards, data tables, and interactive charts. Built with vanilla JavaScript and CSS Grid. Includes dark mode toggle.</p>
+            <div class="project-links">
+              <a href="dashboard.html" class="btn-sm" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="#" class="btn-sm btn-sm-outline" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> Source Code
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-image">
+            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          </div>
+          <div class="project-content">
+            <h3>E-Commerce Product Page</h3>
+            <p>A responsive product listing page with category filtering, price sorting, add-to-cart functionality, and a mobile-friendly cart drawer. Built with HTML, CSS, and JavaScript.</p>
+            <div class="project-links">
+              <a href="e-commerce.html" class="btn-sm" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="#" class="btn-sm btn-sm-outline" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> Source Code
+              </a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <section id="hire" aria-labelledby="hire-heading">
+      <h2 id="hire-heading">Need a website for your business?</h2>
+      <p>I'm currently available for freelance projects. Small business websites, landing pages, or simple web apps — I can help you get online quickly and affordably.</p>
+      <a href="mailto:arunraja102268@gmail.com" class="btn">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i> Send me an email
+      </a>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="section-header">
+        <h2 id="contact-heading">Get In Touch</h2>
+      </div>
+      <div class="contact-grid">
+        
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-info">
+            <h4>Email</h4>
+            <a href="mailto:arunraja102268@gmail.com">arunraja102268@gmail.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="contact-info">
+            <h4>Phone</h4>
+            <a href="tel:+918072427088">+91 8072427088</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-info">
+            <h4>Location</h4>
+            <p>thiruvannamalai, Tamil Nadu, India</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="contact-info">
+            <h4>Resume</h4>
+            <a href="RK-Resume.pdf" download>Download CV (PDF)</a>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="social-links" aria-label="Social media links">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <img src="Southeast Quay.jpg" alt="RK Logo" class="footer-logo" loading="lazy" width="60" height="60">
+      <p>&copy; <span id="year">2026</span> RK Official. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== PROFESSIONAL PRELOADER =====
+    const preloader = document.getElementById('preloader');
+    const progressBar = document.getElementById('progressBar');
+    
+    let progress = 0;
+    const minLoadTime = 1800;
+    const startTime = Date.now();
+
+    function updateProgress() {
+      const remaining = 100 - progress;
+      const increment = remaining * (Math.random() * 0.15 + 0.05);
+      progress = Math.min(progress + increment, 92);
+      
+      progressBar.style.width = progress + '%';
+      if (progress > 10) progressBar.classList.add('active');
+      
+      if (progress < 92) {
+        setTimeout(updateProgress, Math.random() * 180 + 80);
+      }
+    }
+
+    function hidePreloader() {
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, minLoadTime - elapsed);
+      
+      setTimeout(() => {
+        progress = 100;
+        progressBar.style.width = '100%';
+        
+        setTimeout(() => {
+          preloader.classList.add('hidden');
+          document.body.style.overflow = '';
+          
+          setTimeout(() => {
+            preloader.remove();
+          }, 800);
+        }, 400);
+      }, remaining);
+    }
+
+    document.body.style.overflow = 'hidden';
+    updateProgress();
+
+    window.addEventListener('load', hidePreloader);
+    setTimeout(hidePreloader, 5000);
+
+    // ===== MOBILE MENU =====
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.getElementById('navLinks');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+
+    function toggleMenu() {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !isExpanded);
+      navLinks.classList.toggle('active');
+      document.body.style.overflow = isExpanded ? '' : 'hidden';
+    }
+
+    function closeMenu() {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      navLinks.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    navLinksItems.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
+
+    // ===== MISC =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
